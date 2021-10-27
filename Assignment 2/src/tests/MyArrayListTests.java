@@ -40,6 +40,15 @@ class MyArrayListTests {
 		addList();
 		assertEquals(5, this.list.size());
 	}
+	/**
+	 * Tests the default size of an empty arraylist
+	 * (0)
+	 */
+	@Test
+	void testDefaultSize()
+	{
+		assertEquals(0, this.list.size());
+	}
 	
 	/**
 	 * Test if the list is empty
@@ -74,7 +83,7 @@ class MyArrayListTests {
 	@Test
 	void testAdd()
 	{
-		assertTrue(this.list.add(" "));
+		assertTrue(this.list.add("one"));
 	}
 	
 	/*
@@ -168,7 +177,11 @@ class MyArrayListTests {
 	@Test
 	void testContains()
 	{
-		addList();
+		String[] add = {"one", "two", "three", "four", "five"};
+		for(int i = 0; i < add.length; i++)
+		{
+			this.list.add(add[i]);
+		}
 		assertTrue(this.list.contains("two"));
 	}
 	

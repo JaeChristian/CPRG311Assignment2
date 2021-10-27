@@ -1,29 +1,36 @@
 package utility;
 
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public class MyArrayList<E> implements ListADT<E>, Iterator
 {
+	//private static final int DEFAULT_SIZE = 10;
+	private final E[] EMPTY_ARRAYLIST = (E[]) new Object[0];
+	private E[] arrayList;
+	private int size;
+	/**
+	 * Constructs an empty array list
+	 */
 	public MyArrayList()
 	{
-		
+		this.arrayList = EMPTY_ARRAYLIST;
+		size = this.arrayList.length;
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.size;
 	}
 	
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.size==0;
 	}
 	
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
+		this.arrayList = EMPTY_ARRAYLIST;
 		
 	}
 
@@ -34,9 +41,18 @@ public class MyArrayList<E> implements ListADT<E>, Iterator
 	}
 
 	@Override
-	public boolean add(E toAdd) throws NullPointerException {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean add(E toAdd) throws NullPointerException 
+	{
+		this.arrayList = (E[]) Arrays.copyOf(this.arrayList, size+1, this.arrayList.getClass());
+		//if(size>0)
+		//{
+			arrayList[size++] = toAdd;
+		//}
+		if(arrayList[size-1].equals(toAdd))
+		{
+			return true;
+		}
+		else return false;
 	}
 
 	@Override
@@ -60,7 +76,7 @@ public class MyArrayList<E> implements ListADT<E>, Iterator
 	@Override
 	public E get(int index) throws IndexOutOfBoundsException {
 		// TODO Auto-generated method stub
-		return null;
+		return this.arrayList[index];
 	}
 
 	@Override
@@ -83,7 +99,15 @@ public class MyArrayList<E> implements ListADT<E>, Iterator
 
 	@Override
 	public boolean contains(E toFind) throws NullPointerException {
-		// TODO Auto-generated method stub
+		for(int i = 0; i < this.arrayList.length;i++)
+		{
+			if(this.arrayList[i].equals(toFind)) 
+			{
+				//System.out.println(this.arrayList[i]);
+				return true;
+			}
+		}
+		System.out.println("Not found");
 		return false;
 	}
 
