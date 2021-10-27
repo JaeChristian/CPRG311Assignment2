@@ -15,43 +15,75 @@ public class MyArrayList<E> implements ListADT<E>, Iterator
 	public MyArrayList()
 	{
 		this.arrayList = EMPTY_ARRAYLIST;
-		size = this.arrayList.length;
+		this.size = arrayList.length;
 	}
 
 	@Override
 	public int size() {
-		return this.size;
+		return size;
 	}
 	
 	@Override
 	public boolean isEmpty() {
-		return this.size==0;
+		return size==0;
 	}
 	
 	@Override
 	public void clear() {
-		this.arrayList = EMPTY_ARRAYLIST;
-		
+		arrayList = EMPTY_ARRAYLIST;
 	}
 
 	@Override
 	public boolean add(int index, E toAdd) throws NullPointerException, IndexOutOfBoundsException {
-		// TODO Auto-generated method stub
-		return false;
+		if(index < 0 || index > size)
+			throw new IndexOutOfBoundsException("Index must be between 0 and " + size);
+		if(toAdd == null)
+				throw new NullPointerException("Cannot add a null element.");
+		//if index is the size, then add to the end
+		if(index == size)
+		{
+			size++;
+			arrayList = (E[]) Arrays.copyOf(this.arrayList, size, this.arrayList.getClass());
+			arrayList[size-1] = toAdd;
+			for(int i = 0; i < size; i++)
+			{
+				System.out.println(arrayList[i]);
+			}
+		}
+		//if not then shift subsequent values and insert
+		else
+		{
+			//copy arraylist with +1 size and increment size
+			size++;
+			arrayList = (E[]) Arrays.copyOf(this.arrayList, size, this.arrayList.getClass());
+			for(int i = size-1; i > index; i--)
+			{
+				arrayList[i] = arrayList[i-1];
+			}
+			arrayList[index] = toAdd;
+			for(int i = 0; i < size; i++)
+			{
+				System.out.println(arrayList[i]);
+			}
+		}
+		if(get(index).equals(toAdd))
+			return true;
+		else 
+			return false;
 	}
 
 	@Override
 	public boolean add(E toAdd) throws NullPointerException 
 	{
-		this.arrayList = (E[]) Arrays.copyOf(this.arrayList, size+1, this.arrayList.getClass());
-		//if(size>0)
-		//{
-			arrayList[size++] = toAdd;
-		//}
-		if(arrayList[size-1].equals(toAdd))
+		if(toAdd == null)
 		{
-			return true;
+			throw new NullPointerException("Cannot add a null element.");
 		}
+		//copy arraylist with +1 size
+		this.arrayList = (E[]) Arrays.copyOf(this.arrayList, size+1, this.arrayList.getClass());
+		arrayList[size++] = toAdd;
+		if(arrayList[size-1].equals(toAdd))
+			return true;
 		else return false;
 	}
 

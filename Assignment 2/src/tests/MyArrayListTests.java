@@ -74,7 +74,7 @@ class MyArrayListTests {
 	void testAddByIndex()
 	{
 		addList();
-		assertTrue(this.list.add(1, "one.five"));
+		assertTrue(this.list.add(5, "one.five"));
 	}
 	
 	/*
