@@ -2,6 +2,8 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.*;
 import utility.*;
 
@@ -171,16 +173,15 @@ class MyArrayListTests {
 	}
 	
 	/**
-	 * tests if toArray with toHold parameter modifies the parameter
+	 * Test toArray with toHold parameter
 	 */
 	@Test
 	void testToHold()
 	{
+		String[] check = {"one", "two", "three", "four", "five"};
 		addList();
 		String[] toHold = {"two", "four", "six", "eight", "ten"};
-		this.list.toArray(toHold);
-		//list to Array has to equal the new toHold
-		assertEquals(this.list.toArray(), toHold);
+		assertTrue(Arrays.equals(check, this.list.toArray(toHold)));
 	}
 	
 	/**
