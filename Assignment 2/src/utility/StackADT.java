@@ -127,7 +127,7 @@ public interface StackADT<E> extends Iterator
 	 * 
 	 * @param copy
 	 *			The array into which the elements of this list are to be
-	 * 			stored.
+	 * 			stored. If the array is too small, a new array will be allocated.
 	 * @return An array containing the elements of this list.
 	 * @throws NullPointerException
 	 * 			If the specified array is <code>null</code>.

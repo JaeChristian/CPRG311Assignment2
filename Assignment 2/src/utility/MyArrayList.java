@@ -2,23 +2,11 @@ package utility;
 
 import java.util.NoSuchElementException;
 
-public class MyArrayList implements ListADT, Iterator
+public class MyArrayList<E> implements ListADT<E>, Iterator
 {
 	public MyArrayList()
 	{
 		
-	}
-	
-	@Override
-	public boolean hasNext() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Object next() throws NoSuchElementException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -26,7 +14,13 @@ public class MyArrayList implements ListADT, Iterator
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
+	@Override
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
@@ -34,13 +28,13 @@ public class MyArrayList implements ListADT, Iterator
 	}
 
 	@Override
-	public boolean add(int index, Object toAdd) throws NullPointerException, IndexOutOfBoundsException {
+	public boolean add(int index, E toAdd) throws NullPointerException, IndexOutOfBoundsException {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean add(Object toAdd) throws NullPointerException {
+	public boolean add(E toAdd) throws NullPointerException {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -50,45 +44,51 @@ public class MyArrayList implements ListADT, Iterator
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
 	@Override
-	public Object get(int index) throws IndexOutOfBoundsException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object remove(int index) throws IndexOutOfBoundsException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object remove(Object toRemove) throws NullPointerException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object set(int index, Object toChange) throws NullPointerException, IndexOutOfBoundsException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean isEmpty() {
+	public boolean hasNext() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean contains(Object toFind) throws NullPointerException {
+	public E next() throws NoSuchElementException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public E get(int index) throws IndexOutOfBoundsException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public E remove(int index) throws IndexOutOfBoundsException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public E remove(E toRemove) throws NullPointerException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public E set(int index, E toChange) throws NullPointerException, IndexOutOfBoundsException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean contains(E toFind) throws NullPointerException {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public Object[] toArray(Object[] toHold) throws NullPointerException {
+	public E[] toArray(E[] toHold) throws NullPointerException {
 		// TODO Auto-generated method stub
 		return null;
 	}

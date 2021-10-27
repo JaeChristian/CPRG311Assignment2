@@ -94,7 +94,7 @@ public interface QueueADT<E>
 	 * 
 	 * @param copy
 	 *			The array into which the elements of this queue are to be
-	 * 			stored.
+	 * 			stored. If it is not big enough, a new array will be allocated.
 	 * @return An array containing the elements of this queue.
 	 * @throws NullPointerException
 	 * 			If the specified array is <code>null</code>.
