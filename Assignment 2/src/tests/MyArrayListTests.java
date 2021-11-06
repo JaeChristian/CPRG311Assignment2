@@ -39,6 +39,7 @@ class MyArrayListTests {
 	{
 		addList();
 		assertEquals(5, this.list.size());
+		//System.out.println("List size: " + this.list.size());
 	}
 	/**
 	 * Tests the default size of an empty arraylist
@@ -93,8 +94,10 @@ class MyArrayListTests {
 	void testAddAll()
 	{
 		MyArrayList<String> add = new MyArrayList<>();
+		addList();
 		add.add("one");
 		add.add("two");
+		add.add("57");
 		assertTrue(this.list.addAll(add));
 	}
 	
@@ -105,18 +108,25 @@ class MyArrayListTests {
 	void testNext()
 	{
 		addList();
-		assertEquals("one", this.list.next());
+		Iterator<String> iterator = this.list.iterator();
+		iterator.next();
+		assertEquals("two", iterator.next());
 	}
 	
 	/*
-	 * Tests if hasNext boolean returns true
+	 * Tests if hasNext boolean returns false in its last iteration
 	 */
 	@Test
 	void testHasNext()
 	{
 		addList();
-		this.list.next();
-		assertTrue(this.list.hasNext());
+		Iterator<String> iterator = this.list.iterator();
+		iterator.next();
+		iterator.next();
+		iterator.next();
+		iterator.next();
+		iterator.next();
+		assertFalse(iterator.hasNext());
 	}
 	
 	/**
@@ -146,29 +156,38 @@ class MyArrayListTests {
 	void testRemovedShifted()
 	{
 		addList();
-		assertEquals("three", this.list.remove(2));
+		this.list.remove(2);
 		assertEquals("four", this.list.get(2));
 	}
 	
-	/**
-	 * Tests if previous element gets returned
-	 */
 	@Test
-	void testReturnPrevious()
+	void testRemoveByElement()
 	{
 		addList();
-		assertEquals("two", this.list.set(1, "twoo"));
+		//assertEquals("three", this.list.remove("three"));
+	}
+	
+	@Test
+	void testRemoveElementShifted()
+	{
+		addList();
+		boolean found = false;
+		this.list.remove("three");
+		for(int i = 0;i<this.list.size();i++)
+		{
+			if(this.list.get(i).equals("three")) found=true;
+		}
+		assertFalse(found);
 	}
 	
 	/**
-	 * Test if element at indexwas set
+	 * Test if element at index was set
 	 */
 	@Test
 	void testSet()
 	{
 		addList();
-		this.list.set(1, "twoo");
-		assertEquals("twoo", this.list.get(1));
+		assertEquals("twoo", this.list.set(1, "twoo"));
 	}
 	
 	/**
@@ -191,10 +210,10 @@ class MyArrayListTests {
 	@Test
 	void testToHold()
 	{
-		String[] check = {"one", "two", "three", "four", "five"};
 		addList();
-		String[] toHold = {"two", "four", "six", "eight", "ten"};
-		assertTrue(Arrays.equals(check, this.list.toArray(toHold)));
+		String[] toHold = {"two", "four", "six", "eight","fuck", "shit"};
+		this.list.toArray(toHold);
+		assertEquals("one", toHold[0]);
 	}
 	
 	/**
@@ -205,7 +224,12 @@ class MyArrayListTests {
 	{
 		String[] add = {"one", "two", "three", "four", "five"};
 		addList();
-		assertEquals(add, this.list.toArray());
+		//this.list.add("fifty one");
+		assertEquals("one", this.list.toArray()[0]);
+		for(int i = 0; i<this.list.toArray().length;i++)
+		{
+			//System.out.println(this.list.toArray()[i]);
+		}
 		
 	}
 	
