@@ -1,5 +1,7 @@
 package utility;
-import utility.Iterator;
+
+import java.io.Serializable;
+import java.util.NoSuchElementException;
 
 /**
  * <p>
@@ -10,7 +12,7 @@ import utility.Iterator;
  * 
  * @param <E> The type of elements the stack holds.
  */
-public interface QueueADT<E> 
+public interface QueueADT<E> extends Serializable
 {
 	/**
 	 * <p>Precondition: <code>toAdd != null</code></p>
@@ -26,22 +28,22 @@ public interface QueueADT<E>
 	/**
 	 * Precondition: List is not empty/null.
 	 * Postcondition: Removes the first element from a queue.
-	 * @return	True if dequeue is successful.
-	 * @throws NullPointerException
+	 * @return	Dequeued element.
+	 * @throws NoSuchElementException
 	 * 			If element to be removed is null
 	 * 			(Queue is empty)
 	 */
-	public Boolean dequeue() throws NullPointerException;
+	public E dequeue() throws NoSuchElementException;
 	
 	/**
 	 * Precondition: List is not empty/null
 	 * Postcondition: Retrieves the first element from a queue
 	 * @return First element in a queue
-	 * @throws NullPointerException
+	 * @throws NoSuchElementException
 	 * 			If retrieved element is null
 	 * 			(Queue is empty)
 	 */
-	public E peek() throws NullPointerException;
+	public E peek() throws NoSuchElementException;
 	
 	/**
 	 * Precondition: None.
@@ -99,7 +101,15 @@ public interface QueueADT<E>
 	 * @throws NullPointerException
 	 * 			If the specified array is <code>null</code>.
 	 */
-	public E[] toArray(E[] copy) throws NullPointerException;
+	public E[] toArray(E[] toHold) throws NullPointerException;
+	
+	/**
+	 * Precondition: Queue object must be created.
+	 * <p>Postcondition:Returns true if the number of items in the queue equals the length.</p>
+	 * This operation is only implement when a fixed length queue is required.
+	 * @return <code>true</code> if queue is at capacity.
+	 */
+	public boolean isFull();
 	
 	/**
 	 * Returns an iterator over the elements in this queue, in proper sequence.

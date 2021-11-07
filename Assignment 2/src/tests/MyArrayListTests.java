@@ -211,7 +211,7 @@ class MyArrayListTests {
 	void testToHold()
 	{
 		addList();
-		String[] toHold = {"two", "four", "six", "eight","fuck", "shit"};
+		String[] toHold = {"two", "four", "six", "eight","ten", "twelve"};
 		this.list.toArray(toHold);
 		assertEquals("one", toHold[0]);
 	}
@@ -226,10 +226,6 @@ class MyArrayListTests {
 		addList();
 		//this.list.add("fifty one");
 		assertEquals("one", this.list.toArray()[0]);
-		for(int i = 0; i<this.list.toArray().length;i++)
-		{
-			//System.out.println(this.list.toArray()[i]);
-		}
 		
 	}
 	

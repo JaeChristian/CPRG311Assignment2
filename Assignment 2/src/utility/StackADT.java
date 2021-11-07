@@ -1,5 +1,6 @@
 package utility;
-import utility.Iterator;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -10,7 +11,7 @@ import utility.Iterator;
  * 
  * @param <E> The type of elements the stack holds.
  */
-public interface StackADT<E> extends Iterator
+public interface StackADT<E> extends Serializable
 {
 	/**
 	 * Precondition: Element toAdd != null.
@@ -29,11 +30,11 @@ public interface StackADT<E> extends Iterator
 	 * Precondition: List is not empty/null.
 	 * <p>Postcondition: Removes the element at the top of the stack.</p>
 	 * @return True if element is successfully removed.
-	 * @throws NullPointerException
-	 * 			If the element to be deleted is null
+	 * @throws IndexOutOfBoundsException
+	 * 			If the element to be deleted is out of index
 	 * 			(Stack is empty)
 	 */
-	public Boolean pop() throws NullPointerException;
+	public E pop() throws IndexOutOfBoundsException;
 	
 	/**
 	 * Precondition: List is not empty/null.
@@ -42,12 +43,8 @@ public interface StackADT<E> extends Iterator
 	 * @throws IndexOutOfBoundsException
 	 * 			If the index is out of range.
 	 * 			i.e. (index < 0)
-	 * @throws NullPointerException
-	 * 			If the specified element is <code>null</code> and the stack
-	 * 			implementation does not support having <code>null</code>
-	 * 			elements.
 	 */
-	public E peek() throws NullPointerException, IndexOutOfBoundsException;
+	public E peek() throws IndexOutOfBoundsException;
 	
 	/**
 	 * Precondition: None.
@@ -132,7 +129,7 @@ public interface StackADT<E> extends Iterator
 	 * @throws NullPointerException
 	 * 			If the specified array is <code>null</code>.
 	 */
-	public E[] toArray(E[] copy) throws NullPointerException;
+	public E[] toArray(E[] toHold) throws NullPointerException;
 	
 	/**
 	 * Returns an iterator over the elements in this stack, in proper sequence.
