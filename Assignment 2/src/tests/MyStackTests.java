@@ -38,7 +38,8 @@ class MyStackTests {
 	@Test
 	void testPush()
 	{
-		assertTrue(stack.push("one"));
+		stack.push("one");
+		assertEquals("one", stack.peek());
 	}
 	
 	/**
@@ -47,8 +48,8 @@ class MyStackTests {
 	@Test
 	void testPop()
 	{
-		stack.push("one");
-		assertEquals("one", stack.pop());
+		addToStack();
+		assertEquals("four", stack.pop());
 	}
 	
 	/**
