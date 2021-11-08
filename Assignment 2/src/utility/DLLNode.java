@@ -91,4 +91,14 @@ public class DLLNode<E> {
 	public void setPrev(DLLNode prev) {
 		this.prev = prev;
 	}
+	
+	/**
+	 * Preconditions: Node object must be created.
+	 * <p>Postconditions: Sets a new element.</p>
+	 * @param prev
+	 * 			the new previous node.
+	 */
+	public void setElement(E element) {
+		this.element = element;
+	}
 }

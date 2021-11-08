@@ -1,5 +1,6 @@
 package utility;
 
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public class MyDLL<E> implements ListADT<E> {
@@ -104,44 +105,105 @@ public class MyDLL<E> implements ListADT<E> {
 
 	@Override
 	public E remove(int index) throws IndexOutOfBoundsException {
-		//	TODO Auto-generated method stub
-		return null;
+		if(index < 0 || index >= size)
+			throw new IndexOutOfBoundsException("Index must be between 0 and " + size);
+		
+		DLLNode<E> removedNode;
+		if(size==0) {
+			removedNode = head;
+			head = null;
+			tail = null;
+		} else if(index == 0) { //if removing head
+			removedNode = head;
+			head.getNext().setPrev(null);
+			head = head.getNext();
+		} else if(index == size-1) { //if removign tail
+			removedNode = tail;
+			tail.getPrev().setNext(null);
+			tail = tail.getPrev();
+		} else {
+			removedNode = getNode(index);
+			removedNode.getPrev().setNext(removedNode.getNext());
+			removedNode.getNext().setPrev(removedNode.getPrev());
+		}
+		size--;
+		return removedNode.getElement();
 	}
 
 	@Override
 	public E remove(E toRemove) throws NullPointerException {
-		// TODO Auto-generated method stub
+		if(toRemove.equals(null))
+			throw new NullPointerException("Cannot remove null element");
+		DLLNode<E> removedNode = null;
+		for(int i = 0; i < size; i++) {
+			if(get(i).equals(toRemove))
+			{
+				removedNode = getNode(i);
+				remove(i);
+			}
+		}
+		if(!removedNode.equals(null)) {
+			return toRemove;
+		}
 		return null;
 	}
 
 	@Override
 	public E set(int index, E toChange) throws NullPointerException, IndexOutOfBoundsException {
-		// TODO Auto-generated method stub
+		if(index < 0 || index >= size)
+			throw new IndexOutOfBoundsException("Index must be between 0 and " + size);
+		if(toChange.equals(null))
+			throw new NullPointerException("Cannot add null element");
+		
+		getNode(index).setElement(toChange);
+		
+		if(get(index).equals(toChange))
+			return toChange;
 		return null;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return size==0;
 	}
 
 	@Override
-	public boolean contains(E toFind) throws NullPointerException {
-		// TODO Auto-generated method stub
+	public boolean contains(E toFind) throws NullPointerException, IndexOutOfBoundsException {
+		if(size==0)
+			throw new IndexOutOfBoundsException("list is empty");
+		if(toFind.equals(null))
+			throw new NullPointerException("Cannot add null element");
+		
+		for(int i = 0; i < size; i++) {
+			if(get(i).equals(toFind))
+				return true;
+		}
 		return false;
 	}
 
 	@Override
 	public E[] toArray(E[] toHold) throws NullPointerException {
-		// TODO Auto-generated method stub
-		return null;
+		E[] a = (E[])toArray();
+		
+		if(toHold.length < size)
+		{
+			return (E[]) Arrays.copyOf(a, size, toHold.getClass());
+		}
+		System.arraycopy(a, 0, toHold, 0, size);
+		if(toHold.length > size)
+		{
+			toHold[size] = null;
+		}
+		return toHold;
 	}
 
 	@Override
 	public Object[] toArray() {
-		// TODO Auto-generated method stub
-		return null;
+		Object[] DLLArray = new Object[size];
+		for(int i = 0; i < size; i++) {
+			DLLArray[i] = get(i);
+		}
+		return DLLArray;
 	}
 	
 	public DLLNode getNode(int index) {
@@ -159,17 +221,26 @@ public class MyDLL<E> implements ListADT<E> {
 	}
 	
 	private class iterate implements Iterator<E> {
-
+		int index = -1;
+		
 		@Override
 		public boolean hasNext() {
-			// TODO Auto-generated method stub
+			if(index<size-1)
+			{
+				return true;
+			}
 			return false;
 		}
 
 		@Override
 		public E next() throws NoSuchElementException {
-			// TODO Auto-generated method stub
-			return null;
+			if(!hasNext())
+			{
+				throw new NoSuchElementException("No more elements in iterator");
+			}
+			E nextElement = get(index+1);
+			index++;
+			return nextElement;
 		}
 		
 	}

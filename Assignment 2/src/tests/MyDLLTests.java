@@ -51,11 +51,75 @@ class MyDLLTests {
 		toAdd.add("seven");
 		addList();
 		assertTrue(DLL.addAll(toAdd));
-		for(int i = 0; i<DLL.size();i++) {
-			System.out.println(DLL.get(i));
-		}
 		
 	}
+	
+	@Test 
+	void removeByIndex(){
+		addList();
+		assertEquals("four", DLL.remove(3));
+		//printList();
+	}
+	
+	@Test 
+	void removeByElement() {
+		addList();
+		DLL.add(1, "three");
+		assertEquals("three", DLL.remove("three"));
+		//printList();
+	}
+	
+	@Test
+	void testSet() {
+		addList();
+		assertEquals("five", DLL.set(0, "five"));
+		//printList();
+	}
+	
+	@Test
+	void testEmpty() {
+		assertTrue(DLL.isEmpty());
+	}
+	
+	@Test
+	void testContains() {
+		addList();
+		assertFalse(DLL.contains("five"));
+		assertTrue(DLL.contains("one"));
+	}
+	
+	@Test
+	void testToArray() {
+		addList();
+		assertEquals("one", DLL.toArray()[0]);
+		
+	}
+
+	@Test
+	void testToHold() {
+		addList();
+		String[] toHold = {"two", "four", "six", "eight","ten", "twelve"};
+		DLL.toArray(toHold);
+		assertEquals("one", toHold[0]);
+	}
+	
+	@Test
+	void testNext()
+	{
+		addList();
+		Iterator<String> iterator = DLL.iterator();
+		iterator.next();
+		assertEquals("two", iterator.next());
+	}
+	
+	@Test
+	void testHasNext()
+	{
+		addList();
+		Iterator<String> iterator = DLL.iterator();
+		assertFalse(iterator.hasNext());
+	}
+	
 	/**
 	 * Test if get returns the correct node element
 	 */
@@ -65,6 +129,11 @@ class MyDLLTests {
 		assertEquals("one", DLL.get(0));
 	}
 	
+	void printList() {
+		for(int i = 0; i<DLL.size();i++) {
+			System.out.println(DLL.get(i));
+		}
+	}
 	void addList() {
 		DLL.add("one");
 		DLL.add("two");
