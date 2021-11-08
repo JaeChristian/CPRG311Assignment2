@@ -218,7 +218,7 @@ public class MyArrayList<E> implements ListADT<E>
 		return this.arrayList;
 	}
 
-	public class iterate implements Iterator<E>{
+	private class iterate implements Iterator<E>{
 		int index = -1;
 		@Override
 		public boolean hasNext() {
