@@ -31,7 +31,9 @@ public class MyArrayList<E> implements ListADT<E>
 	
 	@Override
 	public void clear() {
-		arrayList = EMPTY_ARRAYLIST;
+		for(int i = 0; i < size; i++) {
+			arrayList[i] = null;
+		}
 		size = 0;
 	}
 
@@ -120,7 +122,7 @@ public class MyArrayList<E> implements ListADT<E>
 
 	@Override
 	public E remove(int index) throws IndexOutOfBoundsException {
-		if(index < 0 || index > size)
+		if(index < 0 || index >= size)
 			throw new IndexOutOfBoundsException("Index must be between 0 and " + size);
 		E removedElement = arrayList[index];
 		//if index is the end of the array, then remove

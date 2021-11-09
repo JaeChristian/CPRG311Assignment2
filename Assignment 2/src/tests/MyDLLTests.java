@@ -18,6 +18,12 @@ class MyDLLTests {
 		DLL.clear();
 	}
 	
+	@Test
+	void testClear() {
+		DLL.add("one");
+		DLL.clear();
+		assertTrue(DLL.isEmpty());
+	}
 	/**
 	 * Test if size returns the correct size.
 	 */

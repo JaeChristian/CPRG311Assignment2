@@ -51,6 +51,9 @@ public class MyStack<E> implements StackADT<E>{
 
 	@Override
 	public boolean equals(StackADT<E> that) throws NullPointerException {
+		if(that.equals(null)) 
+			throw new NullPointerException("Cannot find null element");
+		
 		Object[] a = stack.toArray();
 		Object[] b = that.toArray();
 		if(a.length != b.length) return false;

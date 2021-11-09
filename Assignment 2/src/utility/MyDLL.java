@@ -24,8 +24,9 @@ public class MyDLL<E> implements ListADT<E> {
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		head = null;
+		tail = null;
+		size = 0;
 	}
 
 	@Override
@@ -109,11 +110,11 @@ public class MyDLL<E> implements ListADT<E> {
 			throw new IndexOutOfBoundsException("Index must be between 0 and " + size);
 		
 		DLLNode<E> removedNode;
-		if(size==0) {
+		if(size==1) {
 			removedNode = head;
 			head = null;
 			tail = null;
-		} else if(index == 0) { //if removing head
+		} else if(index == 0 && size != 1){ //if removing head
 			removedNode = head;
 			head.getNext().setPrev(null);
 			head = head.getNext();
