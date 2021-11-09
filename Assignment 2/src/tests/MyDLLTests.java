@@ -117,6 +117,10 @@ class MyDLLTests {
 	{
 		addList();
 		Iterator<String> iterator = DLL.iterator();
+		iterator.next();
+		iterator.next();
+		iterator.next();
+		iterator.next();
 		assertFalse(iterator.hasNext());
 	}
 	
