@@ -1,11 +1,11 @@
 package utility;
 
-import java.util.NoSuchElementException;
-
 public class MyStack<E> implements StackADT<E>{
 	
-	private MyArrayList<E> stack = new MyArrayList<>();
-	
+	private MyArrayList<E> stack;
+	public MyStack(){
+		stack = new MyArrayList<>();
+	}
 	@Override
 	public void push(E toAdd) throws NullPointerException {
 		if(toAdd.equals(null)) 

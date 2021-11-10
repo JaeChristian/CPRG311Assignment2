@@ -4,11 +4,26 @@ import java.util.NoSuchElementException;
 
 public class MyQueue<E> implements QueueADT<E>{
 	
-	private MyDLL<E> queue = new MyDLL<>();
+	private MyDLL<E> queue;
+	private boolean isFixed = false;
+	private int limit;
 	
+	public MyQueue() {
+		queue = new MyDLL<>();
+	}
+	
+	public MyQueue(int limit) {
+		queue = new MyDLL<>();
+		isFixed = true;
+		this.limit = limit;
+	}
 	@Override
-	public void enqueue(E toAdd) throws NullPointerException {
-		queue.add(toAdd);
+	public void enqueue(E toAdd) throws NullPointerException, IndexOutOfBoundsException {
+		if(isFixed && queue.size()==limit) {
+			throw new IndexOutOfBoundsException("Queue is of fixed length. Maximum length reached.");
+		} else {
+			queue.add(toAdd);
+		}
 	}
 
 	@Override
@@ -63,7 +78,9 @@ public class MyQueue<E> implements QueueADT<E>{
 
 	@Override
 	public boolean isFull() {
-		// TODO Auto-generated method stub
+		if(isFixed && queue.size()==limit) {
+			return true;
+		}
 		return false;
 	}
 

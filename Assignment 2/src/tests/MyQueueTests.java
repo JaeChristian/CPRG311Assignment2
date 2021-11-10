@@ -80,6 +80,15 @@ class MyQueueTests {
 	}
 	
 	@Test
+	 void testEnqueueLimit() {
+		queue = new MyQueue<>(4);
+		queue.enqueue("one");
+		queue.enqueue("two");
+		queue.enqueue("three");
+		queue.enqueue("four");
+		assertTrue(queue.isFull());
+	}
+	@Test
 	void testToHold() {
 		String[] toHold = {"two", "four", "six", "eight", "ten"};
 		fillQueue();
