@@ -8,6 +8,7 @@ import problemdomain.XMLParser;
 public class menuDriver {
 	private Scanner input = new Scanner(System.in);
 	private boolean looping = true;
+	
 	public menuDriver() throws FileNotFoundException {
 		boolean valid;
 		String str;
@@ -35,6 +36,11 @@ public class menuDriver {
 		}
 	}
 	
+	/**
+	 * Method ran if the user wants to parse their own file (JAR ONLY)
+	 * @throws FileNotFoundException
+	 * 			if file not found.
+	 */
 	public void customFile() throws FileNotFoundException {
 		String file = "";
 		String choice = "";
@@ -60,6 +66,11 @@ public class menuDriver {
 		}
 	}
 	
+	/**
+	 * Method ran if user wants to parse a sample built in file. 
+	 * @throws FileNotFoundException
+	 * 				if file not found.
+	 */
 	public void sampleFile() throws FileNotFoundException {
 		String file = "";
 		int choice = 0;

@@ -3,6 +3,11 @@ import utility.*;
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * 
+ * Parses a given XML file
+ *
+ */
 public class XMLParser {
 	private static InputStream file;
 	private static File externalFile;
@@ -13,6 +18,15 @@ public class XMLParser {
 	private MyQueue<String> errorQ = new MyQueue<>();
 	private MyQueue<String> extrasQ = new MyQueue<>();
 	
+	/**
+	 * Constructor to read a file inside of the eclipse directory.
+	 * @param filePath 
+	 * 			name of the file to parse
+	 * @param external
+	 * 			allows the use of InputStream instead of File.
+	 * @throws FileNotFoundException
+	 * 			if file not found.
+	 */
 	public XMLParser(String filePath, boolean external) throws FileNotFoundException {
 		this.filePath = filePath;
 		file = getClass().getResourceAsStream(filePath);
@@ -21,6 +35,13 @@ public class XMLParser {
 		parseFile();
 	}
 	
+	/**
+	 * Constructor to read a file in the JAR directory using the File class.
+	 * @param filePath
+	 * 			name of ther file to parse
+	 * @throws FileNotFoundException
+	 * 			if file not found
+	 */
 	public XMLParser(String filePath) throws FileNotFoundException {
 		this.filePath = filePath;
 		externalFile = new File(filePath);
@@ -29,6 +50,9 @@ public class XMLParser {
 		parseFile();
 	}
 	
+	/**
+	 * Reads every line in the file
+	 */
 	public void parseFile() {
 		int lineCount = 0;
 		while(readFile.hasNext()) {
@@ -38,6 +62,9 @@ public class XMLParser {
 		errorHandler();
 	}
 	
+	/**
+	 * This method performs Kitty's algorithm error handling
+	 */
 	public void errorHandler() {
 		int errorCount = 0;
 		if(!stack.isEmpty()) {
@@ -68,9 +95,14 @@ public class XMLParser {
 		}
 	}
 	
+	/**
+	 * Parses each tag in each line of the XML file
+	 * @param line
+	 * 			a String holding the line element.
+	 * @param lineCount
+	 * 			a count of the lines.
+	 */
 	public void parseLine(String line, int lineCount) {
-		int openCount = 0;
-		int closeCount = 0;
 		String tagName = "null";
 		String tag = "null";
 		line = line.trim();
