@@ -1,6 +1,5 @@
 package utility;
 
-import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public class MyArrayList<E> implements ListADT<E>
