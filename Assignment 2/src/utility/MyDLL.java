@@ -1,6 +1,5 @@
 package utility;
 
-import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public class MyDLL<E> implements ListADT<E> {
@@ -17,6 +16,7 @@ public class MyDLL<E> implements ListADT<E> {
 		this.tail = null;
 		this.size = 0;
 	}
+	
 	@Override
 	public int size() {
 		return size;
@@ -181,18 +181,19 @@ public class MyDLL<E> implements ListADT<E> {
 		}
 		return false;
 	}
-
+	
+	//This method does not work if toHold's length is smaller than the DLL size.
 	@Override
 	public E[] toArray(E[] toHold) throws NullPointerException {
 		E[] a = (E[])toArray();
-		
-		if(toHold.length < size)
-		{
-			return (E[]) Arrays.copyOf(a, size, toHold.getClass());
-		}
-		System.arraycopy(a, 0, toHold, 0, size);
-		if(toHold.length > size)
-		{
+		if(toHold.length == size) {
+			for(int i = 0; i < size; i++) {
+				toHold[i] = a[i];
+			}
+		} else if(toHold.length > size) {
+			for(int i = 0; i<size;i++) {
+				toHold[i] = a[i];
+			}
 			toHold[size] = null;
 		}
 		return toHold;
@@ -219,6 +220,20 @@ public class MyDLL<E> implements ListADT<E> {
 	@Override
 	public Iterator<E> iterator() {
 		return new iterate();
+	}
+	
+	private E[] copyArray(E[] toCopy, int length) {
+		E[] copiedArray = (E[]) new Object[length];
+		if(length < toCopy.length) {
+			for(int i = 0; i < length; i++) {
+				copiedArray[i] = toCopy[i];
+			}
+		} else {
+			for(int i = 0; i < toCopy.length; i++) {
+				copiedArray[i] = toCopy[i];
+			}
+		}
+		return copiedArray;
 	}
 	
 	private class iterate implements Iterator<E> {

@@ -46,7 +46,7 @@ public class MyArrayList<E> implements ListADT<E>
 		if(index == size)
 		{
 			size++;
-			arrayList = (E[]) Arrays.copyOf(this.arrayList, size, this.arrayList.getClass());
+			arrayList = copyArray(this.arrayList, size);
 			arrayList[size-1] = toAdd;
 			/*for(int i = 0; i < size; i++)
 			{
@@ -58,7 +58,7 @@ public class MyArrayList<E> implements ListADT<E>
 		{
 			//copy arraylist with +1 size and increment size
 			size++;
-			arrayList = (E[]) Arrays.copyOf(this.arrayList, size, this.arrayList.getClass());
+			arrayList = copyArray(this.arrayList, size);
 			for(int i = size-1; i > index; i--)
 			{
 				arrayList[i] = arrayList[i-1];
@@ -83,7 +83,7 @@ public class MyArrayList<E> implements ListADT<E>
 			throw new NullPointerException("Cannot add a null element.");
 		}
 		//copy arraylist with +1 size
-		this.arrayList = (E[]) Arrays.copyOf(this.arrayList, size+1, this.arrayList.getClass());
+		this.arrayList = copyArray(this.arrayList, size+1);
 		arrayList[size++] = toAdd;
 		if(arrayList[size-1].equals(toAdd))
 			return true;
@@ -101,7 +101,7 @@ public class MyArrayList<E> implements ListADT<E>
 		int toAddLength = toAddArr.length;
 		for(int i = 0; i<toAddLength;i++)
 		{
-			this.arrayList = (E[]) Arrays.copyOf(this.arrayList, size+1, this.arrayList.getClass());
+			this.arrayList = copyArray(this.arrayList, size+1);
 			arrayList[size++] = (E)toAddArr[i];
 		}
 		if(toAddArr[toAddLength-1].equals(arrayList[size-1])) {
@@ -128,7 +128,7 @@ public class MyArrayList<E> implements ListADT<E>
 		if(index == size-1)
 		{
 			size--;
-			arrayList = (E[]) Arrays.copyOf(this.arrayList, size, this.arrayList.getClass());
+			arrayList = copyArray(this.arrayList, size);
 		}
 		//if not then shift subsequent values and insert
 		else
@@ -141,7 +141,7 @@ public class MyArrayList<E> implements ListADT<E>
 			
 			//copy arraylist with -1 size and increment size
 			size--;
-			arrayList = (E[]) Arrays.copyOf(this.arrayList, size, this.arrayList.getClass());
+			arrayList = copyArray(this.arrayList, size);
 		}
 		return removedElement;
 	}
@@ -192,23 +192,24 @@ public class MyArrayList<E> implements ListADT<E>
 		System.out.println("Not found");
 		return false;
 	}
-
-	@SuppressWarnings("unchecked")
+	
+	//This method does not work if toHold's length is smaller than the DLL size.
 	@Override
 	public E[] toArray(E[] toHold) throws NullPointerException {
 		
-		if(toHold.length < size)
-		{
-			return (E[]) Arrays.copyOf(arrayList, size, toHold.getClass());
-		}
-		System.arraycopy(this.arrayList, 0, toHold, 0, size);
-		if(toHold.length > size)
-		{
+		if(toHold.length == size) {
+			for(int i = 0; i < size; i++) {
+				toHold[i] = arrayList[i];
+			}
+		} else if(toHold.length > size) {
+			for(int i = 0; i<size;i++) {
+				toHold[i] = arrayList[i];
+			}
 			toHold[size] = null;
 		}
 		return toHold;
 	}
-
+	
 	@Override
 	public Iterator<E> iterator() {
 		return new iterate();
@@ -218,7 +219,21 @@ public class MyArrayList<E> implements ListADT<E>
 	public Object[] toArray() {
 		return this.arrayList;
 	}
-
+	
+	private E[] copyArray(E[] toCopy, int length) {
+		E[] copiedArray = (E[]) new Object[length];
+		if(length < toCopy.length) {
+			for(int i = 0; i < length; i++) {
+				copiedArray[i] = toCopy[i];
+			}
+		} else {
+			for(int i = 0; i < toCopy.length; i++) {
+				copiedArray[i] = toCopy[i];
+			}
+		}
+		return copiedArray;
+	}
+	
 	private class iterate implements Iterator<E>{
 		int index = -1;
 		@Override
