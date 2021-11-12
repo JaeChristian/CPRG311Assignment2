@@ -4,23 +4,28 @@ import java.io.*;
 import java.util.Scanner;
 
 public class XMLParser {
-	private static File file;
-	private static String filePath = "res/sample3.xml";
+	private static InputStream file;
+	private static File externalFile;
+	private static String filePath;
 	private Scanner readFile;
 	
 	private MyStack<String> stack = new MyStack<>();
 	private MyQueue<String> errorQ = new MyQueue<>();
 	private MyQueue<String> extrasQ = new MyQueue<>();
 	
-	public XMLParser() throws FileNotFoundException {
-		try {
-			file = new File(filePath);
-			readFile = new Scanner(file);
-		}
-		catch(FileNotFoundException ex) {
-			System.out.println("File not found");
-			return;
-		}
+	public XMLParser(String filePath, boolean external) throws FileNotFoundException {
+		this.filePath = filePath;
+		file = getClass().getResourceAsStream(filePath);
+		readFile = new Scanner(file);
+		System.out.println();
+		parseFile();
+	}
+	
+	public XMLParser(String filePath) throws FileNotFoundException {
+		this.filePath = filePath;
+		externalFile = new File(filePath);
+		readFile = new Scanner(externalFile);
+		System.out.println();
 		parseFile();
 	}
 	

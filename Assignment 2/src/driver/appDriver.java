@@ -5,11 +5,11 @@ import problemdomain.*;
 
 /**
  * Still needs
- * Dynamic file handling (ask for file location)
  * Test to fail JUnit Tests
  */
 public class appDriver {
 	public static void main(String args[]) throws FileNotFoundException {
-		XMLParser parser = new XMLParser();
+		//XMLParser parser = new XMLParser("/sample2.xml");
+		new menuDriver();
 	}
 }
